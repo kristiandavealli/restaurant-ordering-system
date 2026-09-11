@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout | Maison Restaurant</title>
+
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="checkout.css">
+</head>
+<body>
+
+<header class="navbar">
+    <div class="logo">
+        <span class="logo-mark">M</span>
+        <div>
+            <h2>MAISON</h2>
+            <small>RESTAURANT</small>
+        </div>
+    </div>
+
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="menu.html">Menu</a>
+        <a href="orders.html">My Orders</a>
+    </nav>
+
+    <div class="nav-actions">
+        <a href="cart.html" class="cart-link">🛒 Cart</a>
+        <a href="login.html" class="login-btn">Login</a>
+    </div>
+</header>
+
+<main class="checkout-page">
+
+    <section class="checkout-heading">
+        <p class="eyebrow">FINAL STEP</p>
+        <h1>Checkout</h1>
+        <p>Complete your details to place your order.</p>
+    </section>
+
+    <section class="checkout-layout">
+
+        <div class="checkout-form-card">
+
+            <div class="form-section">
+                <h2>Customer Information</h2>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="first-name">First Name</label>
+                        <input type="text" id="first-name" placeholder="Enter your first name">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="last-name">Last Name</label>
+                        <input type="text" id="last-name" placeholder="Enter your last name">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" placeholder="you@example.com">
+                </div>
+
+                <div class="form-group">
+                    <label for="phone">Phone Number</label>
+                    <input type="tel" id="phone" placeholder="09XXXXXXXXX">
+                </div>
+            </div>
+
+            <div class="form-section">
+                <h2>Delivery Address</h2>
+
+                <div class="form-group">
+                    <label for="address">Complete Address</label>
+                    <input type="text" id="address" placeholder="House number, street, barangay">
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="city">City / Municipality</label>
+                        <input type="text" id="city" placeholder="Enter city">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="zip">ZIP Code</label>
+                        <input type="text" id="zip" placeholder="ZIP code">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="notes">Order Notes</label>
+                    <textarea id="notes" placeholder="Special instructions for your order"></textarea>
+                </div>
+            </div>
+
+            <div class="form-section">
+                <h2>Payment Method</h2>
+
+                <label class="payment-option">
+                    <input type="radio" name="payment" checked>
+                    <span>
+                        <strong>Cash on Delivery</strong>
+                        <small>Pay when your order arrives.</small>
+                    </span>
+                </label>
+
+                <label class="payment-option">
+                    <input type="radio" name="payment">
+                    <span>
+                        <strong>GCash</strong>
+                        <small>Pay using your GCash account.</small>
+                    </span>
+                </label>
+
+                <label class="payment-option">
+                    <input type="radio" name="payment">
+                    <span>
+                        <strong>Credit / Debit Card</strong>
+                        <small>Secure card payment.</small>
+                    </span>
+                </label>
+            </div>
+
+        </div>
+
+        <aside class="checkout-summary">
+
+            <p class="eyebrow">YOUR ORDER</p>
+            <h2>Order Summary</h2>
+
+            <div class="checkout-item">
+                <div>
+                    <strong>Maison Signature Burger</strong>
+                    <span>Qty: 1</span>
+                </div>
+                <strong>₱189</strong>
+            </div>
+
+            <div class="checkout-item">
+                <div>
+                    <strong>Truffle Mushroom Pasta</strong>
+                    <span>Qty: 1</span>
+                </div>
+                <strong>₱249</strong>
+            </div>
+
+            <div class="checkout-item">
+                <div>
+                    <strong>Iced Vanilla Latte</strong>
+                    <span>Qty: 1</span>
+                </div>
+                <strong>₱129</strong>
+            </div>
+
+            <div class="checkout-line">
+                <span>Subtotal</span>
+                <strong>₱567</strong>
+            </div>
+
+            <div class="checkout-line">
+                <span>Delivery Fee</span>
+                <strong>₱50</strong>
+            </div>
+
+            <div class="checkout-total">
+                <span>Total Amount</span>
+                <strong>₱617</strong>
+            </div>
+
+            <a href="orders.html" class="primary-btn place-order-btn">
+                Place Order
+            </a>
+
+            <a href="cart.html" class="back-cart">
+                ← Back to Cart
+            </a>
+
+        </aside>
+
+    </section>
+
+</main>
+
+<footer class="footer">
+    <div class="footer-brand">
+        <h2>MAISON</h2>
+        <p>Made with passion. Served with love.</p>
+    </div>
+
+    <div class="footer-links">
+        <a href="index.html">Home</a>
+        <a href="menu.html">Menu</a>
+        <a href="orders.html">Orders</a>
+        <a href="login.html">Login</a>
+    </div>
+
+    <p class="copyright">© 2026 Maison Restaurant. All rights reserved.</p>
+</footer>
+
+</body>
+</html>

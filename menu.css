@@ -1,0 +1,203 @@
+.menu-page {
+    background: var(--dark);
+}
+
+.menu-hero {
+    padding: 85px 7% 75px;
+    border-bottom: 1px solid var(--border);
+    background:
+        linear-gradient(90deg, rgba(23, 23, 22, 0.95), rgba(23, 23, 22, 0.65)),
+        url('https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=1600&q=85');
+    background-size: cover;
+    background-position: center;
+}
+
+.menu-hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(42px, 5vw, 68px);
+    font-weight: 500;
+    line-height: 1.1;
+    margin-bottom: 20px;
+}
+
+.menu-hero h1 span {
+    color: var(--gold);
+    font-style: italic;
+}
+
+.menu-hero > p:last-child {
+    color: var(--text-muted);
+    font-size: 14px;
+    max-width: 450px;
+}
+
+.menu-content {
+    padding: 75px 7% 100px;
+}
+
+.menu-heading h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 36px;
+    font-weight: 500;
+}
+
+.category-tabs {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin: 35px 0 45px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--border);
+}
+
+.category-tab {
+    padding: 10px 20px;
+    border: 1px solid var(--border);
+    color: var(--text-muted);
+    font-size: 12px;
+}
+
+.category-tab:hover,
+.category-tab.active {
+    background: var(--cream);
+    color: var(--dark);
+    border-color: var(--cream);
+}
+
+.menu-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+}
+
+.menu-food-card {
+    background: var(--dark-soft);
+    border: 1px solid var(--border);
+    overflow: hidden;
+    transition: 0.3s ease;
+}
+
+.menu-food-card:hover {
+    border-color: rgba(184, 149, 90, 0.6);
+    transform: translateY(-5px);
+}
+
+.menu-food-image {
+    height: 240px;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+}
+
+.menu-img-one {
+    background-image: url('https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=800&q=85');
+}
+
+.menu-img-two {
+    background-image: url('https://images.unsplash.com/photo-1574071318508-1cdbab80d002?auto=format&fit=crop&w=800&q=85');
+}
+
+.menu-img-three {
+    background-image: url('https://images.unsplash.com/photo-1473093295043-cdd812d0e601?auto=format&fit=crop&w=800&q=85');
+}
+
+.menu-img-four {
+    background-image: url('https://images.unsplash.com/photo-1532550907401-a500c9a57435?auto=format&fit=crop&w=800&q=85');
+}
+
+.menu-img-five {
+    background-image: url('https://images.unsplash.com/photo-1606313564200-e75d5e30476c?auto=format&fit=crop&w=800&q=85');
+}
+
+.menu-img-six {
+    background-image: url('https://images.unsplash.com/photo-1517701604599-bb29b565090c?auto=format&fit=crop&w=800&q=85');
+}
+
+.menu-food-details {
+    padding: 22px;
+}
+
+.menu-food-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.menu-category {
+    color: var(--gold);
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 2px;
+}
+
+.menu-food-details h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 21px;
+    font-weight: 500;
+    margin-bottom: 10px;
+}
+
+.menu-food-details > p {
+    color: var(--text-muted);
+    font-size: 12px;
+    line-height: 1.7;
+    min-height: 42px;
+    margin-bottom: 22px;
+}
+
+.menu-food-bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-top: 1px solid var(--border);
+    padding-top: 18px;
+}
+
+.menu-food-bottom strong {
+    font-size: 18px;
+}
+
+.menu-add-btn {
+    border: 1px solid var(--gold);
+    color: var(--gold);
+    padding: 9px 13px;
+    font-size: 11px;
+}
+
+.menu-add-btn:hover {
+    background: var(--gold);
+    color: var(--dark);
+}
+
+@media (max-width: 1000px) {
+    .menu-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 600px) {
+    .menu-hero {
+        padding: 60px 5%;
+    }
+
+    .menu-content {
+        padding: 55px 5%;
+    }
+
+    .menu-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .menu-food-image {
+        height: 250px;
+    }
+
+    .category-tabs {
+        gap: 8px;
+    }
+
+    .category-tab {
+        padding: 9px 14px;
+    }
+}

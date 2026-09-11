@@ -1,0 +1,354 @@
+/* ================================
+   AUTH PAGE
+================================ */
+
+.auth-page {
+    min-height: 75vh;
+    padding: 80px 7%;
+    background: var(--cream);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--dark);
+}
+
+.auth-wrapper {
+    width: 100%;
+    max-width: 1100px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    background: var(--dark);
+    box-shadow: 0 25px 70px rgba(0, 0, 0, 0.15);
+}
+
+
+/* ================================
+   LEFT VISUAL PANEL
+================================ */
+
+.auth-visual {
+    padding: 70px 60px;
+    min-height: 500px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    color: var(--white);
+    background:
+        linear-gradient(
+            rgba(23, 23, 22, 0.82),
+            rgba(23, 23, 22, 0.95)
+        ),
+        url("https://images.unsplash.com/photo-1515003197210-e0cd71810b5f?auto=format&fit=crop&w=1000&q=80");
+    background-size: cover;
+    background-position: center;
+}
+
+.auth-visual .eyebrow {
+    color: var(--gold);
+    margin-bottom: 25px;
+}
+
+.auth-visual h1 {
+    font-family: "Playfair Display", serif;
+    font-size: 52px;
+    font-weight: 500;
+    line-height: 1.15;
+    margin-bottom: 25px;
+}
+
+.auth-visual h1 span {
+    color: var(--gold);
+    font-style: italic;
+}
+
+.auth-visual-text {
+    max-width: 360px;
+    color: #c5c2b9;
+    font-size: 14px;
+    line-height: 1.9;
+}
+
+.auth-quote {
+    margin-top: 60px;
+    padding-left: 18px;
+    border-left: 2px solid var(--gold);
+    color: #aaa79e;
+    font-family: "Playfair Display", serif;
+    font-size: 15px;
+    font-style: italic;
+    line-height: 1.7;
+}
+
+
+/* ================================
+   AUTH CARD
+================================ */
+
+.auth-card {
+    padding: 65px 55px;
+    background: var(--white);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.auth-card .eyebrow {
+    color: var(--gold);
+    margin-bottom: 14px;
+}
+
+.auth-card h2 {
+    font-family: "Playfair Display", serif;
+    font-size: 36px;
+    font-weight: 500;
+    color: var(--dark);
+    margin-bottom: 12px;
+}
+
+.auth-description {
+    color: var(--text-muted);
+    font-size: 14px;
+    line-height: 1.7;
+    margin-bottom: 35px;
+}
+
+
+/* ================================
+   FORM
+================================ */
+
+.auth-form {
+    width: 100%;
+}
+
+.auth-form .form-group {
+    margin-bottom: 22px;
+}
+
+.auth-form label {
+    display: block;
+    margin-bottom: 9px;
+    color: var(--dark);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+}
+
+.auth-form input[type="email"],
+.auth-form input[type="password"],
+.auth-form input[type="text"] {
+    width: 100%;
+    padding: 15px 16px;
+    border: 1px solid #dedbd3;
+    background: #faf9f6;
+    color: var(--dark);
+    font-family: "DM Sans", sans-serif;
+    font-size: 13px;
+    outline: none;
+    transition: 0.3s ease;
+}
+
+.auth-form input:focus {
+    border-color: var(--gold);
+    background: var(--white);
+    box-shadow: 0 0 0 3px rgba(184, 149, 90, 0.1);
+}
+
+.auth-form input::placeholder {
+    color: #aaa79f;
+}
+
+
+/* ================================
+   AUTH OPTIONS
+================================ */
+
+.auth-options {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 5px 0 28px;
+    font-size: 12px;
+}
+
+.remember-me {
+    display: flex !important;
+    align-items: center;
+    gap: 8px;
+    margin: 0 !important;
+    color: var(--text-muted) !important;
+    font-weight: 400 !important;
+}
+
+.remember-me input {
+    width: 14px;
+    height: 14px;
+    accent-color: var(--gold);
+}
+
+.forgot-link {
+    color: var(--gold);
+    text-decoration: none;
+    transition: 0.3s ease;
+}
+
+.forgot-link:hover {
+    color: var(--dark);
+}
+
+
+/* ================================
+   SUBMIT BUTTON
+================================ */
+
+.auth-submit {
+    display: block;
+    width: 100%;
+    padding: 16px;
+    background: var(--dark);
+    color: var(--white);
+    text-align: center;
+    text-decoration: none;
+    border: 1px solid var(--dark);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    transition: 0.3s ease;
+}
+
+.auth-submit:hover {
+    background: var(--gold);
+    border-color: var(--gold);
+    color: var(--white);
+}
+
+
+/* ================================
+   DIVIDER
+================================ */
+
+.auth-divider {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin: 30px 0 25px;
+    color: #aaa79f;
+    font-size: 12px;
+}
+
+.auth-divider::before,
+.auth-divider::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: #e5e1d9;
+}
+
+.auth-divider span {
+    text-transform: uppercase;
+}
+
+
+/* ================================
+   SWITCH AUTH
+================================ */
+
+.auth-switch {
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 13px;
+}
+
+.auth-switch a {
+    color: var(--gold);
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.auth-switch a:hover {
+    color: var(--dark);
+}
+
+
+/* ================================
+   RESPONSIVE DESIGN
+================================ */
+
+@media (max-width: 850px) {
+    .auth-page {
+        padding: 50px 5%;
+    }
+
+    .auth-wrapper {
+        grid-template-columns: 1fr;
+        max-width: 600px;
+    }
+
+    .auth-visual {
+        min-height: 350px;
+        padding: 50px 40px;
+    }
+
+    .auth-visual h1 {
+        font-size: 42px;
+    }
+
+    .auth-quote {
+        margin-top: 35px;
+    }
+
+    .auth-card {
+        padding: 50px 40px;
+    }
+}
+
+@media (max-width: 500px) {
+    .auth-page {
+        padding: 30px 4%;
+    }
+
+    .auth-visual {
+        padding: 40px 25px;
+        min-height: 300px;
+    }
+
+    .auth-visual h1 {
+        font-size: 36px;
+    }
+
+    .auth-card {
+        padding: 40px 25px;
+    }
+
+    .auth-card h2 {
+        font-size: 30px;
+    }
+
+    .auth-options {
+        align-items: flex-start;
+        gap: 15px;
+    }
+}
+
+/* ================================
+   REGISTER CHECKBOX
+================================ */
+
+.terms-check {
+    display: flex !important;
+    align-items: center;
+    gap: 9px;
+    margin: 5px 0 25px;
+    color: var(--text-muted) !important;
+    font-size: 12px !important;
+    font-weight: 400 !important;
+    line-height: 1.5;
+}
+
+.terms-check input {
+    width: 14px;
+    height: 14px;
+    accent-color: var(--gold);
+    flex-shrink: 0;
+}
