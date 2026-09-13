@@ -1,17 +1,13 @@
 <!DOCTYPE html>
-
 <html lang="en">
 
 <head>
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>Login | Maison Restaurant</title>
+    <title>Maison | Restaurant Ordering System</title>
 
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="auth.css">
-
+    <link rel="stylesheet" href="home.css">
 </head>
 
 <body>
@@ -23,157 +19,315 @@
             <span class="logo-mark">M</span>
 
             <div>
-
                 <h2>MAISON</h2>
                 <small>RESTAURANT</small>
-
             </div>
 
         </div>
 
         <nav>
-
-            <a href="index.html">Home</a>
+            <a href="index.html" class="active">Home</a>
             <a href="menu.html">Menu</a>
             <a href="orders.html">My Orders</a>
-
         </nav>
 
         <div class="nav-actions">
-
             <a href="cart.html" class="cart-link">🛒 Cart</a>
             <a href="login.html" class="login-btn">Login</a>
-
         </div>
 
     </header>
 
-    <main class="auth-page">
 
-        <section class="auth-wrapper">
+    <main>
 
-            <div class="auth-visual">
+        <section class="hero">
 
-                <p class="eyebrow">WELCOME BACK</p>
+            <div class="hero-content">
+
+                <p class="eyebrow">WELCOME TO MAISON</p>
 
                 <h1>
-
-                    Good food<br>
-                    <span>starts here.</span>
-
+                    Good food.<br>
+                    <span>Good mood.</span>
                 </h1>
 
-                <p class="auth-visual-text">
-
-                    Sign in to your Maison account and continue
-                    enjoying your favorite meals with ease.
-
+                <p class="hero-description">
+                    Discover delicious meals crafted with fresh ingredients,
+                    made to bring comfort and flavor to your table.
                 </p>
 
-                <div class="auth-quote">
+                <div class="hero-buttons">
 
-                    “Every meal is a memory waiting to be made.”
+                    <a href="menu.html" class="primary-btn">
+                        Explore Our Menu →
+                    </a>
+
+                    <a href="orders.html" class="secondary-btn">
+                        Track Your Order
+                    </a>
+
+                </div>
+
+                <div class="hero-info">
+
+                    <div>
+                        <strong>4.9/5</strong>
+                        <span>Customer Rating</span>
+                    </div>
+
+                    <div>
+                        <strong>30 min</strong>
+                        <span>Average Delivery</span>
+                    </div>
+
+                    <div>
+                        <strong>100%</strong>
+                        <span>Fresh Ingredients</span>
+                    </div>
 
                 </div>
 
             </div>
 
-            <div class="auth-card">
 
-                <p class="eyebrow">ACCOUNT LOGIN</p>
+            <div class="hero-image">
 
-                <h2>Welcome Back</h2>
+                <div class="image-overlay"></div>
 
-                <p class="auth-description">
+                <div class="floating-card">
 
-                    Enter your details to access your account.
+                    <span>★</span>
 
-                </p>
-
-                <form class="auth-form" id="login-form">
-
-                    <div class="form-group">
-
-                        <label for="email">Email Address</label>
-
-                        <input
-                            type="email"
-                            id="email"
-                            placeholder="Enter your email address"
-                            required
-                        >
-
+                    <div>
+                        <strong>Chef's Choice</strong>
+                        <small>Truffle Mushroom Pasta</small>
                     </div>
-
-                    <div class="form-group">
-
-                        <label for="password">Password</label>
-
-                        <input
-                            type="password"
-                            id="password"
-                            placeholder="Enter your password"
-                            required
-                        >
-
-                    </div>
-
-                    <div class="auth-options">
-
-                        <label class="remember-me">
-
-                            <input
-                                type="checkbox"
-                                id="remember-me"
-                            >
-
-                            <span>Remember me</span>
-
-                        </label>
-
-                        <a href="#" class="forgot-link">
-
-                            Forgot Password?
-
-                        </a>
-
-                    </div>
-
-                    <button
-                        type="submit"
-                        class="auth-submit"
-                    >
-
-                        Login to Account
-
-                    </button>
-
-                    <p
-                        id="login-message"
-                        class="login-message"
-                    ></p>
-
-                </form>
-
-                <div class="auth-divider">
-
-                    <span>or</span>
 
                 </div>
-
-                <p class="auth-switch">
-
-                    Don't have an account?
-
-                    <a href="register.html">Create one</a>
-
-                </p>
 
             </div>
 
         </section>
 
+
+        <section class="section categories-section">
+
+            <div class="section-heading">
+
+                <div>
+                    <p class="eyebrow">WHAT ARE YOU CRAVING?</p>
+                    <h2>Explore Categories</h2>
+                </div>
+
+                <a href="menu.html" class="view-link">
+                    View All →
+                </a>
+
+            </div>
+
+
+            <div class="category-grid">
+
+                <a href="menu.html" class="category-card">
+                    <div class="category-icon">🍔</div>
+                    <h3>Burgers</h3>
+                    <p>12 Items</p>
+                </a>
+
+                <a href="menu.html" class="category-card">
+                    <div class="category-icon">🍕</div>
+                    <h3>Pizza</h3>
+                    <p>8 Items</p>
+                </a>
+
+                <a href="menu.html" class="category-card">
+                    <div class="category-icon">🍝</div>
+                    <h3>Pasta</h3>
+                    <p>10 Items</p>
+                </a>
+
+                <a href="menu.html" class="category-card">
+                    <div class="category-icon">🍗</div>
+                    <h3>Chicken</h3>
+                    <p>15 Items</p>
+                </a>
+
+                <a href="menu.html" class="category-card">
+                    <div class="category-icon">🍰</div>
+                    <h3>Desserts</h3>
+                    <p>9 Items</p>
+                </a>
+
+                <a href="menu.html" class="category-card">
+                    <div class="category-icon">🥤</div>
+                    <h3>Drinks</h3>
+                    <p>14 Items</p>
+                </a>
+
+            </div>
+
+        </section>
+
+
+        <section class="section popular-section">
+
+            <div class="section-heading">
+
+                <div>
+                    <p class="eyebrow">CUSTOMER FAVORITES</p>
+                    <h2>Popular Dishes</h2>
+                </div>
+
+                <a href="menu.html" class="view-link">
+                    View Full Menu →
+                </a>
+
+            </div>
+
+
+            <div class="food-grid">
+
+
+                <article class="food-card">
+
+                    <div class="food-image food-one">
+                        <span class="food-badge">Popular</span>
+                    </div>
+
+                    <div class="food-details">
+
+                        <div class="food-title-row">
+                            <h3>Classic Beef Burger</h3>
+                            <span class="rating">★ 4.9</span>
+                        </div>
+
+                        <p>
+                            Juicy beef patty, fresh lettuce, tomato, and special sauce.
+                        </p>
+
+                        <div class="food-bottom">
+
+                            <strong>₱189.00</strong>
+
+                            <button
+                                type="button"
+                                class="add-btn"
+                                data-id="101">
+                                +
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </article>
+
+
+                <article class="food-card">
+
+                    <div class="food-image food-two">
+                        <span class="food-badge">Best Seller</span>
+                    </div>
+
+                    <div class="food-details">
+
+                        <div class="food-title-row">
+                            <h3>Truffle Mushroom Pasta</h3>
+                            <span class="rating">★ 4.8</span>
+                        </div>
+
+                        <p>
+                            Creamy pasta with mushrooms and a touch of truffle oil.
+                        </p>
+
+                        <div class="food-bottom">
+
+                            <strong>₱249.00</strong>
+
+                            <button
+                                type="button"
+                                class="add-btn"
+                                data-id="102">
+                                +
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </article>
+
+
+                <article class="food-card">
+
+                    <div class="food-image food-three">
+                        <span class="food-badge">New</span>
+                    </div>
+
+                    <div class="food-details">
+
+                        <div class="food-title-row">
+                            <h3>Signature Chicken</h3>
+                            <span class="rating">★ 4.9</span>
+                        </div>
+
+                        <p>
+                            Crispy golden chicken served with our signature dipping sauce.
+                        </p>
+
+                        <div class="food-bottom">
+
+                            <strong>₱229.00</strong>
+
+                            <button
+                                type="button"
+                                class="add-btn"
+                                data-id="103">
+                                +
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </article>
+
+
+            </div>
+
+        </section>
+
+
+        <section class="promo-section">
+
+            <div class="promo-content">
+
+                <p class="eyebrow">SPECIAL OFFER</p>
+
+                <h2>
+                    Good food is<br>
+                    always a good idea.
+                </h2>
+
+                <p>
+                    Get 15% off your first order when you sign up today.
+                </p>
+
+                <a href="register.html" class="primary-btn">
+                    Get Started →
+                </a>
+
+            </div>
+
+            <div class="promo-decoration">
+                15<span>%</span>
+            </div>
+
+        </section>
+
     </main>
+
 
     <footer class="footer">
 
@@ -187,6 +341,7 @@
 
         </div>
 
+
         <div class="footer-links">
 
             <a href="index.html">Home</a>
@@ -196,16 +351,15 @@
 
         </div>
 
+
         <p class="copyright">
-
             © 2026 Maison Restaurant. All rights reserved.
-
         </p>
 
     </footer>
 
-    <script src="login.js"></script>
+
+    <script src="index.js"></script>
 
 </body>
-
 </html>
