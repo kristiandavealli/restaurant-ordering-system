@@ -4,165 +4,62 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Orders | Maison Restaurant</title>
-
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="orders.css">
 </head>
 <body>
-
-<header class="navbar">
-    <div class="logo">
-        <span class="logo-mark">M</span>
-        <div>
+    <header class="navbar">
+        <div class="logo">
+            <span class="logo-mark">M</span>
+            <div>
+                <h2>MAISON</h2>
+                <small>RESTAURANT</small>
+            </div>
+        </div>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="menu.html">Menu</a>
+            <a href="orders.html">My Orders</a>
+        </nav>
+        <div class="nav-actions">
+            <a href="cart.html" class="cart-link">🛒 Cart</a>
+            <a href="login.html" class="login-btn">Login</a>
+        </div>
+    </header>
+    <main class="orders-page">
+        <section class="orders-heading">
+            <p class="eyebrow">ORDER HISTORY</p>
+            <h1>My Orders</h1>
+            <p>Track and review your previous restaurant orders.</p>
+        </section>
+        <section class="orders-container">
+            <div class="orders-topbar">
+                <h2>Recent Orders</h2>
+                <select id="order-filter">
+                    <option value="all">All Orders</option>
+                    <option value="completed">Completed</option>
+                    <option value="preparing">Preparing</option>
+                    <option value="cancelled">Cancelled</option>
+                </select>
+            </div>
+            <div id="orders-container"></div>
+        </section>
+    </main>
+    <footer class="footer">
+        <div class="footer-brand">
             <h2>MAISON</h2>
-            <small>RESTAURANT</small>
+            <p>Made with passion. Served with love.</p>
         </div>
-    </div>
-
-    <nav>
-        <a href="index.html">Home</a>
-        <a href="menu.html">Menu</a>
-        <a href="orders.html">My Orders</a>
-    </nav>
-
-    <div class="nav-actions">
-        <a href="cart.html" class="cart-link">🛒 Cart</a>
-        <a href="login.html" class="login-btn">Login</a>
-    </div>
-</header>
-
-<main class="orders-page">
-
-    <section class="orders-heading">
-        <p class="eyebrow">ORDER HISTORY</p>
-        <h1>My Orders</h1>
-        <p>Track and review your previous restaurant orders.</p>
-    </section>
-
-    <section class="orders-container">
-
-        <div class="orders-topbar">
-            <h2>Recent Orders</h2>
-
-            <select>
-                <option>All Orders</option>
-                <option>Completed</option>
-                <option>Preparing</option>
-                <option>Cancelled</option>
-            </select>
+        <div class="footer-links">
+            <a href="index.html">Home</a>
+            <a href="menu.html">Menu</a>
+            <a href="orders.html">Orders</a>
+            <a href="login.html">Login</a>
         </div>
-
-        <div class="order-card">
-
-            <div class="order-card-header">
-                <div>
-                    <p class="order-number">ORDER #MSN-2026-001</p>
-                    <span class="order-date">September 11, 2026 · 7:30 PM</span>
-                </div>
-
-                <span class="order-status preparing">Preparing</span>
-            </div>
-
-            <div class="order-card-content">
-                <div class="order-items">
-                    <p>Maison Signature Burger × 1</p>
-                    <p>Truffle Mushroom Pasta × 1</p>
-                    <p>Iced Vanilla Latte × 1</p>
-                </div>
-
-                <div class="order-price">
-                    <span>Total Amount</span>
-                    <strong>₱617</strong>
-                </div>
-            </div>
-
-            <div class="order-card-footer">
-                <span>Payment: Cash on Delivery</span>
-                <a href="#" class="view-order-btn">View Details</a>
-            </div>
-
-        </div>
-
-        <div class="order-card">
-
-            <div class="order-card-header">
-                <div>
-                    <p class="order-number">ORDER #MSN-2026-000</p>
-                    <span class="order-date">September 8, 2026 · 6:15 PM</span>
-                </div>
-
-                <span class="order-status completed">Completed</span>
-            </div>
-
-            <div class="order-card-content">
-                <div class="order-items">
-                    <p>Classic Cheeseburger × 1</p>
-                    <p>French Fries × 1</p>
-                    <p>Fresh Lemonade × 1</p>
-                </div>
-
-                <div class="order-price">
-                    <span>Total Amount</span>
-                    <strong>₱398</strong>
-                </div>
-            </div>
-
-            <div class="order-card-footer">
-                <span>Payment: GCash</span>
-                <a href="#" class="view-order-btn">View Details</a>
-            </div>
-
-        </div>
-
-        <div class="order-card">
-
-            <div class="order-card-header">
-                <div>
-                    <p class="order-number">ORDER #MSN-2026-099</p>
-                    <span class="order-date">September 3, 2026 · 12:40 PM</span>
-                </div>
-
-                <span class="order-status cancelled">Cancelled</span>
-            </div>
-
-            <div class="order-card-content">
-                <div class="order-items">
-                    <p>Chicken Alfredo × 1</p>
-                    <p>Iced Coffee × 1</p>
-                </div>
-
-                <div class="order-price">
-                    <span>Total Amount</span>
-                    <strong>₱329</strong>
-                </div>
-            </div>
-
-            <div class="order-card-footer">
-                <span>Payment: Cash on Delivery</span>
-                <a href="#" class="view-order-btn">View Details</a>
-            </div>
-
-        </div>
-
-    </section>
-
-</main>
-
-<footer class="footer">
-    <div class="footer-brand">
-        <h2>MAISON</h2>
-        <p>Made with passion. Served with love.</p>
-    </div>
-
-    <div class="footer-links">
-        <a href="index.html">Home</a>
-        <a href="menu.html">Menu</a>
-        <a href="orders.html">Orders</a>
-        <a href="login.html">Login</a>
-    </div>
-
-    <p class="copyright">© 2026 Maison Restaurant. All rights reserved.</p>
-</footer>
-
+        <p class="copyright">
+            © 2026 Maison Restaurant. All rights reserved.
+        </p>
+    </footer>
+    <script src="orders.js"></script>
 </body>
 </html>
