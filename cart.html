@@ -1,22 +1,30 @@
 <!DOCTYPE html>
+
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Your Cart | Maison Restaurant</title>
 
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="cart.css">
 </head>
+
 <body>
 
 <header class="navbar">
+
     <div class="logo">
+
         <span class="logo-mark">M</span>
+
         <div>
             <h2>MAISON</h2>
             <small>RESTAURANT</small>
         </div>
+
     </div>
 
     <nav>
@@ -29,14 +37,21 @@
         <a href="cart.html" class="cart-link">🛒 Cart</a>
         <a href="login.html" class="login-btn">Login</a>
     </div>
+
 </header>
 
 <main class="cart-page">
 
     <section class="cart-heading">
+
         <p class="eyebrow">YOUR ORDER</p>
+
         <h1>Your Cart</h1>
-        <p>Review your selected dishes before checking out.</p>
+
+        <p>
+            Review your selected dishes before checking out.
+        </p>
+
     </section>
 
     <section class="cart-layout">
@@ -44,72 +59,14 @@
         <div class="cart-items-panel">
 
             <div class="panel-header">
+
                 <h2>Selected Items</h2>
-                <span>3 Items</span>
+
+                <span id="cart-count">0 Items</span>
+
             </div>
 
-            <div class="cart-item">
-                <div class="cart-food-image cart-img-one"></div>
-
-                <div class="cart-food-details">
-                    <p class="food-category">BURGER</p>
-                    <h3>Maison Signature Burger</h3>
-                    <p>Premium beef patty with cheese and special sauce.</p>
-
-                    <div class="quantity-control">
-                        <a href="#">−</a>
-                        <span>1</span>
-                        <a href="#">+</a>
-                    </div>
-                </div>
-
-                <div class="cart-item-side">
-                    <strong>₱189</strong>
-                    <a href="#" class="remove-item">Remove</a>
-                </div>
-            </div>
-
-            <div class="cart-item">
-                <div class="cart-food-image cart-img-two"></div>
-
-                <div class="cart-food-details">
-                    <p class="food-category">PASTA</p>
-                    <h3>Truffle Mushroom Pasta</h3>
-                    <p>Creamy pasta with mushrooms and truffle flavor.</p>
-
-                    <div class="quantity-control">
-                        <a href="#">−</a>
-                        <span>1</span>
-                        <a href="#">+</a>
-                    </div>
-                </div>
-
-                <div class="cart-item-side">
-                    <strong>₱249</strong>
-                    <a href="#" class="remove-item">Remove</a>
-                </div>
-            </div>
-
-            <div class="cart-item">
-                <div class="cart-food-image cart-img-three"></div>
-
-                <div class="cart-food-details">
-                    <p class="food-category">DRINK</p>
-                    <h3>Iced Vanilla Latte</h3>
-                    <p>Cold espresso with creamy vanilla flavor.</p>
-
-                    <div class="quantity-control">
-                        <a href="#">−</a>
-                        <span>1</span>
-                        <a href="#">+</a>
-                    </div>
-                </div>
-
-                <div class="cart-item-side">
-                    <strong>₱129</strong>
-                    <a href="#" class="remove-item">Remove</a>
-                </div>
-            </div>
+            <div id="cart-items"></div>
 
             <a href="menu.html" class="continue-shopping">
                 ← Continue Shopping
@@ -120,38 +77,66 @@
         <aside class="order-summary-card">
 
             <p class="eyebrow">SUMMARY</p>
+
             <h2>Order Summary</h2>
 
             <div class="summary-row">
+
                 <span>Subtotal</span>
-                <strong>₱567</strong>
+
+                <strong id="subtotal">₱0</strong>
+
             </div>
 
             <div class="summary-row">
+
                 <span>Delivery Fee</span>
-                <strong>₱50</strong>
+
+                <strong id="delivery-fee">₱50</strong>
+
             </div>
 
             <div class="summary-row">
+
                 <span>Discount</span>
-                <strong>₱0</strong>
+
+                <strong id="discount">₱0</strong>
+
             </div>
 
             <div class="promo-box">
-                <input type="text" placeholder="Promo code">
-                <button type="button">Apply</button>
+
+                <input
+                    type="text"
+                    id="promo-code"
+                    placeholder="Promo code"
+                >
+
+                <button type="button" id="promo-button">
+                    Apply
+                </button>
+
             </div>
 
             <div class="summary-total">
+
                 <span>Total</span>
-                <strong>₱617</strong>
+
+                <strong id="total">₱50</strong>
+
             </div>
 
-            <a href="checkout.html" class="primary-btn checkout-btn">
+            <a
+                href="checkout.html"
+                class="primary-btn checkout-btn"
+                id="checkout-button"
+            >
                 Proceed to Checkout
             </a>
 
-            <p class="secure-note">🔒 Secure and convenient ordering</p>
+            <p class="secure-note">
+                🔒 Secure and convenient ordering
+            </p>
 
         </aside>
 
@@ -160,20 +145,34 @@
 </main>
 
 <footer class="footer">
+
     <div class="footer-brand">
+
         <h2>MAISON</h2>
-        <p>Made with passion. Served with love.</p>
+
+        <p>
+            Made with passion. Served with love.
+        </p>
+
     </div>
 
     <div class="footer-links">
+
         <a href="index.html">Home</a>
         <a href="menu.html">Menu</a>
         <a href="orders.html">Orders</a>
         <a href="login.html">Login</a>
+
     </div>
 
-    <p class="copyright">© 2026 Maison Restaurant. All rights reserved.</p>
+    <p class="copyright">
+        © 2026 Maison Restaurant. All rights reserved.
+    </p>
+
 </footer>
 
+<script src="cart.js"></script>
+
 </body>
+
 </html>
