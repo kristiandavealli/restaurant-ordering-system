@@ -1,9 +1,6 @@
 document.addEventListener("DOMContentLoaded", function () {
-
     const buttons = document.querySelectorAll(".add-btn");
     const cartLink = document.querySelector(".cart-link");
-
-    let cart = JSON.parse(localStorage.getItem("maisonCart")) || [];
 
     const foods = {
         101: {
@@ -34,87 +31,88 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     };
 
-    function updateCartCount() {
+    function updateCartCount(count) {
+        if (!cartLink) {
+            return;
+        }
 
-        let totalItems = 0;
-
-        cart.forEach(function (item) {
-            totalItems += Number(item.quantity);
-        });
-
-        if (cartLink) {
-
-            if (totalItems > 0) {
-                cartLink.textContent = "🛒 Cart (" + totalItems + ")";
-            } else {
-                cartLink.textContent = "🛒 Cart";
-            }
-
+        if (count > 0) {
+            cartLink.textContent = "🛒 Cart (" + count + ")";
+        } else {
+            cartLink.textContent = "🛒 Cart";
         }
     }
 
-    function saveCart() {
+    async function loadCartCount() {
+        try {
+            const response = await fetch("cart.php");
+            const data = await response.json();
 
-        localStorage.setItem(
-            "maisonCart",
-            JSON.stringify(cart)
-        );
+            if (data.success) {
+                let count = 0;
 
+                if (Array.isArray(data.items)) {
+                    data.items.forEach(function (item) {
+                        count += Number(item.quantity);
+                    });
+                }
+
+                updateCartCount(count);
+            }
+        } catch (error) {
+            console.error("Unable to load cart count:", error);
+        }
     }
 
     buttons.forEach(function (button) {
-
-        button.addEventListener("click", function () {
-
+        button.addEventListener("click", async function () {
             const id = Number(button.getAttribute("data-id"));
-
             const food = foods[id];
 
             if (!food) {
                 return;
             }
 
-            const existingItem = cart.find(function (item) {
+            button.disabled = true;
+            button.textContent = "...";
 
-                return Number(item.id) === id;
-
-            });
-
-            if (existingItem) {
-
-                existingItem.quantity =
-                    Number(existingItem.quantity) + 1;
-
-            } else {
-
-                cart.push({
-                    id: food.id,
-                    name: food.name,
-                    category: food.category,
-                    description: food.description,
-                    price: food.price,
-                    quantity: 1,
-                    image: food.image
+            try {
+                const response = await fetch("index.php", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        product_id: food.id,
+                        quantity: 1
+                    })
                 });
 
-            }
+                const data = await response.json();
 
-            saveCart();
+                if (!data.success) {
+                    throw new Error(data.message || "Unable to add item to cart.");
+                }
 
-            updateCartCount();
+                updateCartCount(Number(data.cart_count));
 
-            button.textContent = "✓";
+                button.textContent = "✓";
 
-            setTimeout(function () {
+                setTimeout(function () {
+                    button.textContent = "+";
+                    button.disabled = false;
+                }, 800);
+
+            } catch (error) {
+                console.error(error);
+
+                alert(error.message || "Something went wrong.");
 
                 button.textContent = "+";
-
-            }, 800);
-
+                button.disabled = false;
+            }
         });
-
     });
 
-    updateCartCount();
-
+    loadCartCount();
 });
