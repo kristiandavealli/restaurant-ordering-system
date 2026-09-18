@@ -15,12 +15,15 @@ document.addEventListener("DOMContentLoaded", function () {
         const rememberMe = document.getElementById("remember-me").checked;
 
         const registeredUser = JSON.parse(
+
             localStorage.getItem("maisonUser")
+
         );
 
         if (!registeredUser) {
 
             message.textContent =
+
                 "No account found. Please create an account first.";
 
             message.style.color = "#dc2626";
@@ -30,36 +33,51 @@ document.addEventListener("DOMContentLoaded", function () {
         }
 
         if (
+
             email === registeredUser.email &&
+
             password === registeredUser.password
+
         ) {
 
             localStorage.setItem(
+
                 "maisonLoggedIn",
+
                 "true"
+
             );
 
             localStorage.setItem(
+
                 "maisonCurrentUser",
+
                 JSON.stringify(registeredUser)
+
             );
 
             if (rememberMe) {
 
                 localStorage.setItem(
+
                     "maisonRememberMe",
+
                     "true"
+
                 );
 
             } else {
 
                 localStorage.removeItem(
+
                     "maisonRememberMe"
+
                 );
 
             }
 
             message.textContent =
+
                 "Login successful! Redirecting...";
 
             message.style.color = "#16a34a";
@@ -73,6 +91,7 @@ document.addEventListener("DOMContentLoaded", function () {
         } else {
 
             message.textContent =
+
                 "Invalid email or password.";
 
             message.style.color = "#dc2626";
