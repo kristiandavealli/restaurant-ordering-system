@@ -1,42 +1,62 @@
 document.addEventListener("DOMContentLoaded", function () {
 
     const ordersContainer = document.getElementById("orders-container");
-
     const orderFilter = document.getElementById("order-filter");
 
-    let orders = JSON.parse(localStorage.getItem("maisonOrders")) || [];
+    let orders = [];
 
     function formatPrice(price) {
-
-        return "₱" + Number(price).toLocaleString("en-PH");
-
+        return "₱" + Number(price).toLocaleString("en-PH", {
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2
+        });
     }
 
     function formatDate(date) {
-
         const orderDate = new Date(date);
 
         return orderDate.toLocaleDateString("en-PH", {
-
             year: "numeric",
-
             month: "long",
-
             day: "numeric"
-
         });
-
     }
 
-    function saveOrders() {
+    function loadOrders() {
 
-        localStorage.setItem(
+        fetch("orders.php")
+            .then(response => response.json())
+            .then(data => {
 
-            "maisonOrders",
+                if (!data.success) {
+                    ordersContainer.innerHTML = `
+                        <div class="empty-orders">
+                            <div class="empty-orders-icon">⚠️</div>
+                            <h3>Unable to Load Orders</h3>
+                            <p>${data.message || "Something went wrong."}</p>
+                        </div>
+                    `;
+                    return;
+                }
 
-            JSON.stringify(orders)
+                orders = data.orders || [];
 
-        );
+                renderOrders(orderFilter.value);
+
+            })
+            .catch(error => {
+
+                console.error("Orders error:", error);
+
+                ordersContainer.innerHTML = `
+                    <div class="empty-orders">
+                        <div class="empty-orders-icon">⚠️</div>
+                        <h3>Connection Error</h3>
+                        <p>Unable to connect to the server.</p>
+                    </div>
+                `;
+
+            });
 
     }
 
@@ -50,7 +70,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
             filteredOrders = orders.filter(function (order) {
 
-                return order.status.toLowerCase() === filter.toLowerCase();
+                return String(order.status).toLowerCase() === filter.toLowerCase();
 
             });
 
@@ -59,31 +79,19 @@ document.addEventListener("DOMContentLoaded", function () {
         if (filteredOrders.length === 0) {
 
             ordersContainer.innerHTML = `
-
                 <div class="empty-orders">
-
                     <div class="empty-orders-icon">📋</div>
-
                     <h3>No Orders Yet</h3>
-
                     <p>
-
                         Your recent orders will appear here after you place an order.
-
                     </p>
-
                     <a href="menu.html" class="primary-btn">
-
                         Browse Menu
-
                     </a>
-
                 </div>
-
             `;
 
             return;
-
         }
 
         filteredOrders.forEach(function (order) {
@@ -94,63 +102,55 @@ document.addEventListener("DOMContentLoaded", function () {
 
             const items = order.items || [];
 
-            const customer = order.customer || {};
-
             const customerName = (
-
-                (customer.firstName || "") +
-
+                (order.first_name || "") +
                 " " +
-
-                (customer.lastName || "")
-
+                (order.last_name || "")
             ).trim();
 
             const customerAddress = [
-
-                customer.address || "",
-
-                customer.city || "",
-
-                customer.zip || ""
-
+                order.address || "",
+                order.city || "",
+                order.zip || ""
             ].filter(Boolean).join(", ");
 
-            const customerPhone = customer.phone || "Not provided";
+            const customerPhone = order.phone || "Not provided";
 
             let itemsHTML = "";
 
             items.forEach(function (item) {
 
                 itemsHTML += `
-
                     <div class="order-item">
 
                         <div class="order-item-image ${item.image || ""}"></div>
 
                         <div class="order-item-info">
 
-                            <h4>${item.name}</h4>
+                            <h4>${item.product_name}</h4>
 
                             <span>
-
                                 ${item.quantity} × ${formatPrice(item.price)}
-
                             </span>
 
                         </div>
 
                         <strong>
-
-                            ${formatPrice(item.price * item.quantity)}
-
+                            ${formatPrice(Number(item.price) * Number(item.quantity))}
                         </strong>
 
                     </div>
-
                 `;
 
             });
+
+            const itemCount = items.reduce(function (total, item) {
+
+                return total + Number(item.quantity);
+
+            }, 0);
+
+            const status = String(order.status || "Pending");
 
             orderCard.innerHTML = `
 
@@ -159,23 +159,17 @@ document.addEventListener("DOMContentLoaded", function () {
                     <div>
 
                         <p class="order-number">
-
-                            ${order.orderNumber || "ORDER"}
-
+                            ORDER #${order.id}
                         </p>
 
                         <h3>
-
-                            ${formatDate(order.date)}
-
+                            ${formatDate(order.created_at)}
                         </h3>
 
                     </div>
 
-                    <span class="order-status ${order.status.toLowerCase()}">
-
-                        ${order.status}
-
+                    <span class="order-status ${status.toLowerCase()}">
+                        ${status}
                     </span>
 
                 </div>
@@ -187,9 +181,7 @@ document.addEventListener("DOMContentLoaded", function () {
                         <span>Customer</span>
 
                         <strong>
-
                             ${customerName || "Guest Customer"}
-
                         </strong>
 
                     </div>
@@ -199,9 +191,7 @@ document.addEventListener("DOMContentLoaded", function () {
                         <span>Address</span>
 
                         <strong>
-
                             ${customerAddress || "Not provided"}
-
                         </strong>
 
                     </div>
@@ -211,9 +201,7 @@ document.addEventListener("DOMContentLoaded", function () {
                         <span>Contact Number</span>
 
                         <strong>
-
                             ${customerPhone}
-
                         </strong>
 
                     </div>
@@ -229,62 +217,39 @@ document.addEventListener("DOMContentLoaded", function () {
                 <div class="order-card-footer">
 
                     <span>
-
-                        ${items.reduce(function (total, item) {
-
-                            return total + Number(item.quantity);
-
-                        }, 0)}
-
-                        item${items.reduce(function (total, item) {
-
-                            return total + Number(item.quantity);
-
-                        }, 0) !== 1 ? "s" : ""}
-
+                        ${itemCount}
+                        item${itemCount !== 1 ? "s" : ""}
                     </span>
 
                     <strong>
-
                         Total: ${formatPrice(order.total)}
-
                     </strong>
 
                 </div>
 
                 <div class="order-actions">
 
-                    ${order.status.toLowerCase() === "preparing" ? `
+                    ${
+                        status.toLowerCase() === "preparing"
+                        ? `
+                            <button
+                                type="button"
+                                class="order-complete-btn"
+                                data-order="${order.id}"
+                            >
+                                Mark as Completed
+                            </button>
 
-                        <button
-
-                            type="button"
-
-                            class="order-complete-btn"
-
-                            data-order="${order.orderNumber}"
-
-                        >
-
-                            Mark as Completed
-
-                        </button>
-
-                        <button
-
-                            type="button"
-
-                            class="order-cancel-btn"
-
-                            data-order="${order.orderNumber}"
-
-                        >
-
-                            Cancel Order
-
-                        </button>
-
-                    ` : ""}
+                            <button
+                                type="button"
+                                class="order-cancel-btn"
+                                data-order="${order.id}"
+                            >
+                                Cancel Order
+                            </button>
+                        `
+                        : ""
+                    }
 
                 </div>
 
@@ -295,40 +260,20 @@ document.addEventListener("DOMContentLoaded", function () {
         });
 
         const completeButtons = document.querySelectorAll(
-
             ".order-complete-btn"
-
         );
 
         const cancelButtons = document.querySelectorAll(
-
             ".order-cancel-btn"
-
         );
 
         completeButtons.forEach(function (button) {
 
             button.addEventListener("click", function () {
 
-                const orderNumber = button.getAttribute("data-order");
+                const orderId = button.getAttribute("data-order");
 
-                const order = orders.find(function (item) {
-
-                    return item.orderNumber === orderNumber;
-
-                });
-
-                if (!order) {
-
-                    return;
-
-                }
-
-                order.status = "completed";
-
-                saveOrders();
-
-                renderOrders(orderFilter.value);
+                updateOrderStatus(orderId, "Completed");
 
             });
 
@@ -338,39 +283,52 @@ document.addEventListener("DOMContentLoaded", function () {
 
             button.addEventListener("click", function () {
 
-                const orderNumber = button.getAttribute("data-order");
-
-                const order = orders.find(function (item) {
-
-                    return item.orderNumber === orderNumber;
-
-                });
-
-                if (!order) {
-
-                    return;
-
-                }
+                const orderId = button.getAttribute("data-order");
 
                 const confirmCancel = confirm(
-
                     "Are you sure you want to cancel this order?"
-
                 );
 
                 if (!confirmCancel) {
-
                     return;
-
                 }
 
-                order.status = "cancelled";
-
-                saveOrders();
-
-                renderOrders(orderFilter.value);
+                updateOrderStatus(orderId, "Cancelled");
 
             });
+
+        });
+
+    }
+
+    function updateOrderStatus(orderId, status) {
+
+        fetch("orders.php", {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                id: orderId,
+                status: status
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+
+            if (!data.success) {
+                alert(data.message || "Unable to update order.");
+                return;
+            }
+
+            loadOrders();
+
+        })
+        .catch(error => {
+
+            console.error("Status update error:", error);
+
+            alert("Unable to connect to the server.");
 
         });
 
@@ -382,6 +340,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
     });
 
-    renderOrders();
+    loadOrders();
 
 });
