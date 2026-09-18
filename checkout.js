@@ -9,22 +9,47 @@ document.addEventListener("DOMContentLoaded", function () {
 
     const DELIVERY_FEE = 50;
 
-    const cart = JSON.parse(
-        localStorage.getItem("maisonCheckoutCart")
-    ) || [];
-
-    const savedTotal = JSON.parse(
-        localStorage.getItem("maisonCheckoutTotal")
-    );
+    let cart = [];
+    let discount = 0;
 
     function formatPrice(price) {
-        return "₱" + Number(price).toLocaleString("en-PH");
+        return "₱" + Number(price).toLocaleString("en-PH", {
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2
+        });
     }
 
     function getSubtotal() {
         return cart.reduce(function (total, item) {
-            return total + item.price * item.quantity;
+            return total + Number(item.price) * Number(item.quantity);
         }, 0);
+    }
+
+    async function loadCart() {
+        try {
+            const response = await fetch("cart.php", {
+                credentials: "include"
+            });
+
+            const data = await response.json();
+
+            if (!data.success) {
+                throw new Error(data.message || "Unable to load cart.");
+            }
+
+            cart = data.items || [];
+
+            renderCheckout();
+
+        } catch (error) {
+            console.error("Cart error:", error);
+
+            checkoutItems.innerHTML = `
+                <p>Unable to load your cart.</p>
+            `;
+
+            placeOrderButton.disabled = true;
+        }
     }
 
     function renderCheckout() {
@@ -37,10 +62,10 @@ document.addEventListener("DOMContentLoaded", function () {
                 <p>Your cart is empty.</p>
             `;
 
-            subtotalElement.textContent = "₱0";
-            deliveryElement.textContent = "₱0";
-            discountElement.textContent = "₱0";
-            totalElement.textContent = "₱0";
+            subtotalElement.textContent = "₱0.00";
+            deliveryElement.textContent = "₱0.00";
+            discountElement.textContent = "₱0.00";
+            totalElement.textContent = "₱0.00";
 
             placeOrderButton.disabled = true;
 
@@ -55,12 +80,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
             checkoutItem.innerHTML = `
                 <div>
-                    <strong>${item.name}</strong>
+                    <strong>${item.product_name}</strong>
                     <span>Qty: ${item.quantity}</span>
                 </div>
 
                 <strong>
-                    ${formatPrice(item.price * item.quantity)}
+                    ${formatPrice(Number(item.price) * Number(item.quantity))}
                 </strong>
             `;
 
@@ -69,24 +94,28 @@ document.addEventListener("DOMContentLoaded", function () {
 
         const subtotal = getSubtotal();
 
-        let total = savedTotal;
-
-        if (!total || total < 0) {
-            total = subtotal + DELIVERY_FEE;
+        if (discount > subtotal) {
+            discount = subtotal;
         }
 
-        const discount = Math.max(
-            subtotal + DELIVERY_FEE - total,
-            0
-        );
+        const total = subtotal + DELIVERY_FEE - discount;
 
         subtotalElement.textContent = formatPrice(subtotal);
+
         deliveryElement.textContent = formatPrice(DELIVERY_FEE);
-        discountElement.textContent = "-" + formatPrice(discount);
+
+        if (discount > 0) {
+            discountElement.textContent = "-" + formatPrice(discount);
+        } else {
+            discountElement.textContent = "₱0.00";
+        }
+
         totalElement.textContent = formatPrice(total);
+
+        placeOrderButton.disabled = false;
     }
 
-    placeOrderButton.addEventListener("click", function () {
+    placeOrderButton.addEventListener("click", async function () {
 
         if (cart.length === 0) {
             alert("Your cart is empty.");
@@ -100,6 +129,7 @@ document.addEventListener("DOMContentLoaded", function () {
         const address = document.getElementById("address").value.trim();
         const city = document.getElementById("city").value.trim();
         const zip = document.getElementById("zip").value.trim();
+        const notes = document.getElementById("notes").value.trim();
 
         if (
             !firstName ||
@@ -114,61 +144,76 @@ document.addEventListener("DOMContentLoaded", function () {
             return;
         }
 
-        const paymentMethod = document.querySelector(
+        const selectedPayment = document.querySelector(
             'input[name="payment"]:checked'
-        ).value;
-
-        const subtotal = getSubtotal();
-
-        const total = savedTotal || subtotal + DELIVERY_FEE;
-
-        const existingOrders = JSON.parse(
-            localStorage.getItem("maisonOrders")
-        ) || [];
-
-        const orderNumber = "MSN-" + Date.now();
-
-        const order = {
-            orderNumber: orderNumber,
-            date: new Date().toLocaleString("en-PH", {
-                year: "numeric",
-                month: "long",
-                day: "numeric",
-                hour: "numeric",
-                minute: "2-digit"
-            }),
-            status: "preparing",
-            payment: paymentMethod,
-            customer: {
-                firstName: firstName,
-                lastName: lastName,
-                email: email,
-                phone: phone,
-                address: address,
-                city: city,
-                zip: zip,
-                notes: document.getElementById("notes").value.trim()
-            },
-            items: cart,
-            total: total
-        };
-
-        existingOrders.unshift(order);
-
-        localStorage.setItem(
-            "maisonOrders",
-            JSON.stringify(existingOrders)
         );
 
-        localStorage.removeItem("maisonCart");
-        localStorage.removeItem("maisonCheckoutCart");
-        localStorage.removeItem("maisonCheckoutTotal");
+        if (!selectedPayment) {
+            alert("Please select a payment method.");
+            return;
+        }
 
-        alert("Your order has been placed successfully!");
+        const paymentMethod = selectedPayment.value;
 
-        window.location.href = "orders.html";
+        const orderData = {
+            first_name: firstName,
+            last_name: lastName,
+            email: email,
+            phone: phone,
+            address: address,
+            city: city,
+            zip: zip,
+            notes: notes,
+            payment_method: paymentMethod,
+            discount: discount
+        };
+
+        placeOrderButton.disabled = true;
+        placeOrderButton.textContent = "Placing Order...";
+
+        try {
+
+            const response = await fetch("checkout.php", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                credentials: "include",
+                body: JSON.stringify(orderData)
+            });
+
+            const data = await response.json();
+
+            if (!data.success) {
+                throw new Error(
+                    data.message || "Unable to place order."
+                );
+            }
+
+            alert(
+                "Your order has been placed successfully!\n\n" +
+                "Order ID: " +
+                data.order_id +
+                "\nTotal: " +
+                formatPrice(data.total)
+            );
+
+            window.location.href = "orders.html";
+
+        } catch (error) {
+
+            console.error("Checkout error:", error);
+
+            alert(
+                error.message ||
+                "Something went wrong while placing your order."
+            );
+
+            placeOrderButton.disabled = false;
+            placeOrderButton.textContent = "Place Order";
+        }
     });
 
-    renderCheckout();
+    loadCart();
 
 });
